@@ -40,4 +40,14 @@ mod tests {
 
         assert_eq!(score_grid.score(), 5)
     }
+
+    #[test]
+    fn two_rolls_of_five_pins_should_score_ten() {
+        let mut score_grid = ScoreGrid::default();
+
+        score_grid.roll(5);
+        score_grid.roll(5);
+
+        assert_eq!(score_grid.total_score, 10);
+    }
 }
