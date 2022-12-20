@@ -1,10 +1,24 @@
 pub struct ScoreGrid {
-    pub total_score: usize,
+    total_score: usize,
 }
 
 impl ScoreGrid {
+    pub fn new() -> Self {
+        Self { total_score: 0 }
+    }
+
     pub fn score(&self) -> usize {
         self.total_score
+    }
+
+    pub fn roll(&mut self, arg: usize) {
+        self.total_score += arg;
+    }
+}
+
+impl Default for ScoreGrid {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -14,10 +28,16 @@ mod tests {
 
     #[test]
     fn initial_score_should_be_0() {
-        let mut score_grid = ScoreGrid { total_score: 0 };
-
-        score_grid.total_score = 0;
+        let score_grid = ScoreGrid::default();
 
         assert_eq!(0, score_grid.score());
+    }
+
+    #[test]
+    fn five_pin_roll_should_score_five_points() {
+        let mut score_grid = ScoreGrid::default();
+        score_grid.roll(5);
+
+        assert_eq!(score_grid.score(), 5)
     }
 }
